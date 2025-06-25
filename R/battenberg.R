@@ -589,7 +589,7 @@ battenberg = function(analysis="paired",
     
     # If patient is male, get copy number status of ChrX based only on logR segmentation (due to hemizygosity of SNPs)
     # Only do this when X chromosome is included
-    if (ismale & "X" %in% chrom_names){
+    if (ismale & "chrX" %in% chrom_names){
       print("callChrXsubclones")
       callChrXsubclones(tumourname=samplename[sampleidx],
                         X_gamma=1000,

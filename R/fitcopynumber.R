@@ -681,7 +681,6 @@ merge_segments=function(subclones, bafsegmented, logR, rho, psi, platform_gamma,
   subclones=df2gr(subclones,'chr','startpos','endpos')
   str(bafsegmented)
   bafsegmented=df2gr(bafsegmented,'Chromosome','Position','Position')
-  logR$Chromosome <- paste0("chr", logR$Chromosome)
   str(logR)
   logR=df2gr(logR,'Chromosome','Position','Position')
   names(GenomicRanges::mcols(logR))='logR'

@@ -1023,13 +1023,19 @@ callChrXsubclones = function(tumourname,X_gamma=1000,X_kmin=100,genomebuild,AR=T
     }
   }
     } else {
+    original_chr_name <- PCFinput$Chromosome[1] # Store the original name
+    PCFinput$Chromosome <- "X"                   # Temporarily change to "X"
+
     PCF=copynumber::pcf(PCFinput,gamma=X_gamma,kmin=X_kmin)
+
+    # Change the chromosome name in the result back to the original
+    if (!is.null(PCF) && nrow(PCF) > 0) {
+        PCF$chrom <- original_chr_name
+    }
   }
   write.table(PCF,paste0(tumourname,"_PCF_gamma_",X_gamma,"_chrX.txt"),col.names=T,row.names=F,quote=F,sep="\t")
   print("PCF segmentation done")
-  
-  
-  
+
   # INPUT for copy number inference
   SAMPLEsegs=data.frame(PCF,stringsAsFactors=F)
   pupl=read.table(paste0(tumourname,"_purity_ploidy.txt"),header=T,stringsAsFactors=F)
